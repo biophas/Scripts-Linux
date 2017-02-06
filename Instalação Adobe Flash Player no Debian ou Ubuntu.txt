@@ -1,0 +1,15 @@
+Instalação Adobe Flash Player no Debian ou Ubuntu
+
+cd /opt
+
+wget https://packages.debian.org/jessie/flashplugin-nonfree-extrasound
+
+ls 
+
+flashplugin-nonfree-extrasound
+
+apt-get install flashplugin-nonfree-extrasound
+
+update-flashplugin-nonfree --install
+
+

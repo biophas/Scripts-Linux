@@ -1,0 +1,129 @@
+
+ABNT Associação Brasileira de Normas Técnicas
+ACL Access Control List (Lista de controle de acesso)
+AD Active Directory
+AIX Advanced Interactive eXecutive
+APT Advanced Packaging Tool
+BDB Berkeley´s Data Base
+BSD Berkeley Software Distribuition
+CCITT Consultive Committee for International Telegraphy and Telephony
+DAP Directory Acess Protocol
+DNS Domain Name System
+FTP File Transfer Protocol
+GPO Group Policy Objects
+HP-UX Hewlett Packard UniX
+HTTP Hyper Text Transfer Protocol
+IEC International Eletromechanical Commission (Comissão internacional de eletrotécnica)
+IETF Internet Engineering Task Force
+IMAP Internet Message Access Protocol
+IP Internet Protocol
+ISO International Standardization Organization (Organização internacional para padronização)
+LDAP Lightweight Directory Access Protocol
+LDIF LDAP Interchange Format
+MTA Mail Transfer Agent
+NBR Normas Técnicas Brasilieira, emitiadas pela ABNT
+NT New Technology
+OSI Open Systems Interconnection
+POP Post Office Protocol
+RFC Request for Comments (Pedido de comentários)
+SMTP Simple Mail Transfer Protocol
+SNMP Simple Network Management Protocol
+SQL Structured Query Language
+SSH Secure SHell
+SSL Secure Socket Layer
+SSO Single Sign On
+TCP Transmission Control Protocol
+TSL Transport Layer Security
+RAID Redundant Array of Independent Disks
+NFS - Network File System
+
+Descrição
+
+dc Domain Component (Identificação Única do objeto)
+ou Organization Unit (Unidade Oganizacional)
+cn Common Name(Nome comum)
+dn Distinguished Name (Nome de destino)
+c Country (País)
+o Oganization (Organização)
+st State (Estado)
+
+OPENLDAP
+
+O OpenLDAP é uma implementação do LDAP desenvolvida pela Universidade de Michigam e mantido pelo o projeto OpenLDAP.
+
+Características
+Suporte a IPV4 e IPV6
+Autenticação
+Segurança no transporte usando SSL e TLS
+Controle de acesso de alta peformance
+Replicação de base
+
+O openLDAP tem uma licença especifica chamada OpenLDAP Public License (OpenLDAP Project, 2009).
+
+É idenependete de plataformas
+
+AIX
+BSD
+HP-UX
+MAC OS X
+Solaris
+Microsoft Windows (Baseado na tecnologia NT)
+
+Técnicas de replicação
+
+Slurpd (Descontinuado na versão 2.4)
+syncrepl (Postura Master ou Slave)
+
+O termo criptografia tem origem grega e surgiu da fusão das palavras "kryptós" e "graphein", que siginificam "oculto" e "escrever", respectivamente.
+
+Trata-se de um conjunto de conceitos e técnicas que visa codificar uma informação de forma que somente o emissor e o recptor possam acessá-la, evitando que um instruso consiga interceptá-la.
+
+Segundo (TRIGO,2007) na maioria das vezes, o servidor LDAP é utilizado para armazenar dados de usuários, como senha de autenticação, por exemplo, assim segurança é algo fundamental.
+
+Para aumentar a segurança no transporte de dados é possível criptografá-los, usando o TLS ou SSL, assim mesmo que alguém consiga interceptar os dados, não consiguirá visualizar o que está sendo trafegado.
+
+Banco de dados
+
+O LDAP é apenas um protocolo de comunicação entre um cliente e um serviço de diretórios.
+
+O OpenLDAP possuem dois tipos de bancos nativos, o LDBM e o BerkeleyDB, sendo que o segundo é para ele a melhor opção quanto ao desempenho.
+
+ACL - Access Contrl List (Lista de controle de acesso)
+
+É a definição de todos os recursos de acesso controlado e todos aqueles usuários que têm acesso a eles.
+
+Backup e Restauração
+
+ldapsearch -x -D cn=admin,dc=fatene,dc=edu,dc=br -b dc=fatene,dc=edu,dc=br -LLL -W > backup.ldif
+
+Instalação do Servidor OpenLDAP
+
+É necessário verificar os parâmentros entre o hostname e fqdn, editando respectivamente os arquivos /etc/HOSTNAME e /etc/hosts
+
+EX.
+
+127.0.0.1	localhost
+127.0.1.1	note-219.firstdecision.local	note-219
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+ping hostname.dominio.com.br
+
+#instalação do pacote slapd
+
+aptitude install slapd
+
+#Defina a senha do Administrador da base LDAP durante a instalação.
+
+#Verifique se exista a base instalada
+
+slapcat |more
+
+Configuração do OpenLDAP
+
+Existem duas formas de configuração do OpenLDAP
+
+/etc/ldap/slapd.conf ou com cn=config (utilizado atualmente) que é uma forma de fazer alterações on-line
