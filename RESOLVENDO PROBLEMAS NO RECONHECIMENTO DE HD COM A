@@ -1,0 +1,25 @@
+RESOLVENDO PROBLEMAS NO RECONHECIMENTO DE HD COM A FORMATÇÃO EXFAT NO DEBIAN
+
+
+Faça o download do arquivo Package: exfat-fuse (1.1.0-2+deb8u1) em https://packages.debian.org/jessie/amd64/exfat-fuse/download
+
+
+Após o download instale o arquivo.
+
+dpkg -i exfat-fuse_1.1.0-2+deb8u1_amd64.deb 
+
+Após a instalação liste para verificar se o arquivo está instalado.
+
+dpkg -l | grep exfat-fuse
+
+root@note-219:/home/suporte# dpkg -l | grep exfat-fuse
+ii  exfat-fuse                            1.1.0-2+deb8u1                       amd64        read and write exFAT driver for FUSE
+
+Após a instalação conectar o pendrive o reconhecimento é automático
+
+
+Fim do processo.
+
+
+
+

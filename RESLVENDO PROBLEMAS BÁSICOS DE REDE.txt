@@ -1,0 +1,244 @@
+RESLVENDO PROBLEMAS BÁSICOS DE REDE
+
+O comando host retorna o endereço IP dando um nome de rede e vice-versa.
+
+host -C certificacaolinux.com.br
+
+hostname > Mostra o nome local da máquina 
+hostname --fqdn > Mostra o nome completo da máquina (sistema + domínio)
+
+dig endereço
+
+O comando dig (domain information groper) é uma poderosa e flexível ferramenta para busca de informações em servidores de resolução de nomes.
+
+dig certificacaolinux.com.br
+
+root@note-219:/home/suporte# dig certificacaolinux.com.br
+
+; <<>> DiG 9.9.5-9+deb8u7-Debian <<>> certificacaolinux.com.br
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 60737
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;certificacaolinux.com.br.	IN	A
+
+;; ANSWER SECTION:
+certificacaolinux.com.br. 299	IN	A	52.2.90.137
+certificacaolinux.com.br. 299	IN	A	52.2.185.151
+
+;; Query time: 40 msec
+;; SERVER: 192.168.1.83#53(192.168.1.83)
+;; WHEN: Tue Oct 25 12:43:55 BRST 2016
+;; MSG SIZE  rcvd: 85
+
+
+O comando dig também pode ser utilizado par fazer perguntas por registros específicos no servidor de nomes.
+
+NETSTAT
+
+root@note-219:/home/suporte# netstat -anp
+Conexões Internet Ativas (servidores e estabelecidas)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado      PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               OUÇA       648/sshd        
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               OUÇA       16246/cupsd     
+tcp        0      0 0.0.0.0:40088           0.0.0.0:*               OUÇA       591/rpc.statd   
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               OUÇA       1056/exim4      
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               OUÇA       1706/vmware-hostd
+tcp        0      0 0.0.0.0:902             0.0.0.0:*               OUÇA       1274/vmware-authdla
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               OUÇA       581/rpcbind     
+tcp        0      0 127.0.0.1:8307          0.0.0.0:*               OUÇA       1706/vmware-hostd
+tcp        0      0 192.168.1.178:34829     216.58.222.37:443       ESTABELECIDA 2143/firefox.real
+tcp        0      0 127.0.0.1:443           127.0.0.1:52444         ESTABELECIDA 1706/vmware-hostd
+tcp        0      0 192.168.1.178:46380     64.233.190.189:443      ESTABELECIDA 2143/firefox.real
+tcp        0      0 192.168.1.178:39278     13.69.188.18:443        ESTABELECIDA 13699/suporte --pid
+tcp        0      0 192.168.1.178:54028     65.55.252.169:443       ESTABELECIDA 13699/suporte --pid
+
+netstat -i 
+
+root@note-219:/home/suporte# netstat -i
+Tabela de Interfaces do Kernel
+Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+eth0       1500 0         0      0      0 0             0      0      0      0 BMU
+lo        65536 0      2794      0      0 0          2794      0      0      0 LRU
+wlan0      1500 0    329785      0      0 0        114959      0      0      0 BMRU
+
+
+
+netstat -na --tcp > Exibe as conexões atuais sem nomes de host para o protocolo TCP.
+
+root@note-219:/home/suporte# netstat -na --tcp
+Conexões Internet Ativas (servidores e estabelecidas)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               OUÇA      
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               OUÇA      
+tcp        0      0 0.0.0.0:40088           0.0.0.0:*               OUÇA      
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               OUÇA      
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               OUÇA      
+tcp        0      0 0.0.0.0:902             0.0.0.0:*               OUÇA      
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               OUÇA      
+tcp        0      0 127.0.0.1:8307          0.0.0.0:*               OUÇA      
+tcp        0      0 127.0.0.1:52645         127.0.0.1:443           ESTABELECIDA
+tcp        0      0 192.168.1.178:41974     23.97.215.12:443        ESTABELECIDA
+tcp        0      0 192.168.1.178:46380     64.233.190.189:443      ESTABELECIDA
+tcp        0      0 192.168.1.178:54028     65.55.252.169:443       ESTABELECIDA
+tcp        0      0 192.168.1.178:41978     23.97.215.12:443        ESTABELECIDA
+tcp        0      0 127.0.0.1:443           127.0.0.1:52645         ESTABELECIDA
+tcp        0      0 192.168.1.178:34979     216.58.222.37:443       ESTABELECIDA
+tcp        0      0 192.168.1.178:54769     40.117.145.132:443      ESTABELECIDA
+tcp        0      0 192.168.1.178:41976     23.97.215.12:443        ESTABELECIDA
+tcp        0      0 192.168.1.178:34699     216.58.222.46:443       ESTABELECIDA
+tcp        0      0 127.0.0.1:443           127.0.0.1:50757         ESTABELECIDA
+tcp        0      0 127.0.0.1:50757         127.0.0.1:443           ESTABELECIDA
+tcp        0      0 192.168.1.178:34691     216.58.222.46:443       ESTABELECIDA
+
+netstat -p > Exibe o PID e nome do processo ao qual pertence cada soket:
+
+root@note-219:/home/suporte# netstat -p
+Conexões Internet Ativas (sem os servidores)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado      PID/Program name
+tcp        0      0 localhost:52645         localhost:https         ESTABELECIDA 2314/vmware     
+tcp        0      0 note-219:46380          ce-in-f189.1e100.:https ESTABELECIDA 2143/firefox.real
+tcp        0      0 note-219:54028          65.55.252.169:https     ESTABELECIDA 13699/suporte --pid
+tcp        0      0 localhost:https         localhost:52645         ESTABELECIDA 1706/vmware-hostd
+tcp        0      0 note-219:37691          23.99.194.215:https     ESTABELECIDA 13699/suporte --pid
+tcp        0      0 note-219:34699          gru09s17-in-f14.1:https ESTABELECIDA 2143/firefox.real
+tcp        0      0 localhost:https         localhost:50757         ESTABELECIDA 1706/vmware-hostd
+tcp        0      0 localhost:50757         localhost:https         ESTABELECIDA 2314/vmware     
+tcp        0      0 note-219:53427          93.184.215.200:https    ESTABELECIDA 13699/suporte --pid
+tcp        0      0 note-219:54786          40.117.145.132:https    ESTABELECIDA 13699/suporte --pid
+tcp        0      0 note-219:34691          gru09s17-in-f14.1:https ESTABELECIDA 2143/firefox.real
+tcp        0      0 note-219:37690          23.99.194.215:https     ESTABELECIDA 13699/suporte --pid
+tcp6       0      0 localhost:8307          localhost:60694         ESTABELECIDA 1706/vmware-hostd
+tcp6       0      0 localhost:60694         localhost:8307          ESTABELECIDA 1706/vmware-hostd
+tcp6       1      0 localhost:36190         localhost:ipp           ESPERANDO_FECHAR 830/cups-browsed
+tcp6       0      0 localhost:8307          localhost:34349         ESTABELECIDA 1706/vmware-hostd
+tcp6       0      0 localhost:34349         localhost:8307          ESTABELECIDA 1706/vmware-hostd
+
+netstat -r 
+
+root@note-219:/home/suporte# netstat -r
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções   MSS Janela  irtt Iface
+default         srvend.firstdec 0.0.0.0         UG        0 0          0 wlan0
+link-local      *               255.255.0.0     U         0 0          0 wlan0
+192.168.1.0     *               255.255.255.0   U         0 0          0 wlan0
+
+
+netstat -lptu > Listas portas abertas e seus respectivos processos
+
+
+root@note-219:/home/suporte# netstat -lptu 
+Conexões Internet Ativas (sem os servidores)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado      PID/Program name
+tcp        0      0 *:ssh                   *:*                     OUÇA       648/sshd        
+tcp        0      0 localhost:ipp           *:*                     OUÇA       16246/cupsd     
+tcp        0      0 *:40088                 *:*                     OUÇA       591/rpc.statd   
+tcp        0      0 localhost:smtp          *:*                     OUÇA       1056/exim4      
+tcp        0      0 *:https                 *:*                     OUÇA       1706/vmware-hostd
+tcp        0      0 *:902                   *:*                     OUÇA       1274/vmware-authdla
+tcp        0      0 *:sunrpc                *:*                     OUÇA       581/rpcbind     
+tcp        0      0 localhost:8307          *:*                     OUÇA       1706/vmware-hostd
+tcp6       0      0 [::]:ssh                [::]:*                  OUÇA       648/sshd        
+tcp6       0      0 localhost:ipp           [::]:*                  OUÇA       16246/cupsd     
+
+netstat -tulpn
+
+root@note-219:/home/suporte# netstat -tulpn
+Conexões Internet Ativas (sem os servidores)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado      PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               OUÇA       648/sshd        
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               OUÇA       16246/cupsd     
+tcp        0      0 0.0.0.0:40088           0.0.0.0:*               OUÇA       591/rpc.statd   
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               OUÇA       1056/exim4      
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               OUÇA       1706/vmware-hostd
+tcp        0      0 0.0.0.0:902             0.0.0.0:*               OUÇA       1274/vmware-authdla
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               OUÇA       581/rpcbind     
+tcp        0      0 127.0.0.1:8307          0.0.0.0:*               OUÇA       1706/vmware-hostd
+tcp6       0      0 :::22                   :::*                    OUÇA       648/sshd        
+tcp6       0      0 ::1:631                 :::*                    OUÇA       16246/cupsd     
+tcp6       0      0 ::1:25                  :::*                    OUÇA       1056/exim4      
+tcp6       0      0 :::443                  :::*                    OUÇA       1706/vmware-hostd
+tcp6       0      0 :::902                  :::*                    OUÇA       1274/vmware-authdla
+tcp6       0      0 :::111                  :::*                    OUÇA       581/rpcbind     
+
+netstat -sp (tcp|upd) > Mostra estatísticas apenas TCP ou UDP
+
+root@note-219:/home/suporte# netstat -sp
+Ip:
+    217964 total packets received
+    54402 with invalid addresses
+    0 forwarded
+    0 incoming packets discarded
+    151292 incoming packets delivered
+    80385 requests sent out
+    56 outgoing packets dropped
+    15 dropped because of missing route
+    1 fragments dropped after timeout
+    47 reassemblies required
+    23 packets reassembled ok
+    1 packet reassembles failed
+Icmp:
+    2149 ICMP messages received
+    0 input ICMP message failed.
+    Histograma de entrada ICMP:
+        destination unreachable: 136
+        echo replies: 2013
+    2381 ICMP messages sent
+    0 ICMP messages failed
+    Histograma de saída ICMP
+        destination unreachable: 335
+        echo request: 2046
+
+		
+root@note-219:/home/suporte# netstat -i
+Tabela de Interfaces do Kernel
+Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+eth0       1500 0         0      0      0 0             0      0      0      0 BMU
+lo        65536 0      2660      0      0 0          2660      0      0      0 LRU
+wlan0      1500 0    282881      0      0 0        101526      0      0      0 BMRU
+
+traceroute ou traceroute6 endereço
+
+Retorna os endereços das máquinas e outros dispositivos de rede por onde os pacotes passam para chegar a um determinado destino (Rota de endereços).
+
+O traceroute utiliza o tempo de vida (TTL - Time To Live) dos pacotes IP para forçar uma resposta do protocolo ICMP TIME EXCEEDED de cada dospositivo por onde o pacote passa para obter as informações necessárias (TTL padrão são 30 hosts).
+
+tracepath e tracepath6
+
+Objetivo é traçar um caminho entre o host e um endereço de rede e tenta descobrir qual é a MTU (Unidade máxima de transmissão).
+
+tracepath www.google.com
+
+Ele tenta achar um tempo médio de resposta e cada passo no caminho e retorna o MTU final.
+
+NETCAT
+
+netcat ou nc é um utilitário utilizado para fazer "quase tudo" quando se trata dos protocolos tcp e udp, ele pode ser usado para abrir conexões TCP, enviar pacotes UDP, escutar qualquer porta TCP ou UDP e escanear as portas abertas de um host.
+
+nc google.com 80
+
+nc -l -p 6565 > /tmp/arquivo.tmp 
+
+nc -vv -w1 google.com 20-443
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
